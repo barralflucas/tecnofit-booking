@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
       .from("bookings")
       .select("booking_time")
       .eq("booking_date", date)
-      .neq("status", "cancelled");
+      .eq("status", "confirmed");
 
     if (bErr) {
       console.error("[/api/slots] Bookings query error:", bErr.message);

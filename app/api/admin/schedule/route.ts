@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
 
   const schedule: SlotEntry[] = slots.map((time) => {
     const slotBookings = (bookings ?? []).filter((b) => b.booking_time === time);
-    const active = slotBookings.filter((b) => b.status !== "cancelled");
+    const active = slotBookings.filter((b) => b.status === "confirmed");
     return {
       time,
       bookings: slotBookings,

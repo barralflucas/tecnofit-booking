@@ -84,7 +84,7 @@ export async function PATCH(
       .select("id", { count: "exact", head: true })
       .eq("booking_date", new_date)
       .eq("booking_time", new_time)
-      .neq("status", "cancelled")
+      .eq("status", "confirmed")
       .neq("id", id);
 
     if (countErr) {
