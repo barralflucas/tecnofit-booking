@@ -126,6 +126,12 @@ export default function BookingForm() {
     const d = selectedDate!;
     const dayLabel = `${DAYS_ES[d.getDay()]} ${d.getDate()} de ${MONTHS_ES[d.getMonth()]}`;
 
+    const tips = [
+      { icon: "✉️", text: "Te enviamos un mail con todos los detalles de tu reserva." },
+      { icon: "⏰", text: "Te recomendamos llegar 10 minutos antes de tu turno." },
+      { icon: "👟", text: "Traé ropa cómoda y una botella de agua." },
+    ];
+
     return (
       <div
         style={{
@@ -140,17 +146,18 @@ export default function BookingForm() {
           textAlign: "center",
         }}
       >
-        {/* checkmark icon */}
+        {/* Checkmark icon */}
         <div
           style={{
-            width: "64px",
-            height: "64px",
+            width: "68px",
+            height: "68px",
             borderRadius: "50%",
             backgroundColor: "#ffffff",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             margin: "0 auto 24px",
+            boxShadow: "0 0 0 12px rgba(255,255,255,0.06)",
           }}
         >
           <svg
@@ -169,29 +176,35 @@ export default function BookingForm() {
 
         <h2
           style={{
-            fontSize: "28px",
+            fontSize: "30px",
             fontWeight: 800,
             letterSpacing: "-0.03em",
-            margin: "0 0 12px 0",
+            margin: "0 0 10px 0",
+            color: "#f5f5f5",
           }}
         >
-          ¡Reserva confirmada!
+          Reserva confirmada
         </h2>
 
         <p style={{ color: "#b8b8b8", fontSize: "16px", lineHeight: 1.6, marginBottom: "28px" }}>
-          Te esperamos el <strong style={{ color: "#f5f5f5" }}>{dayLabel}</strong>{" "}
-          a las <strong style={{ color: "#f5f5f5" }}>{selectedTime}</strong>.
+          Te esperamos el{" "}
+          <strong style={{ color: "#f5f5f5" }}>{dayLabel}</strong>
+          {" "}a las{" "}
+          <strong style={{ color: "#f5f5f5" }}>{selectedTime} hs</strong>.
           <br />
-          Enviamos la confirmación a <strong style={{ color: "#f5f5f5" }}>{email}</strong>.
+          Confirmación enviada a{" "}
+          <strong style={{ color: "#f5f5f5" }}>{email}</strong>.
         </p>
 
+        {/* Booking summary */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gap: "12px",
-            marginBottom: "32px",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "10px",
+            marginBottom: "28px",
           }}
+          className="booking-summary-grid"
         >
           {[
             { label: "Nombre", value: name },
@@ -205,12 +218,42 @@ export default function BookingForm() {
                 borderRadius: "14px",
                 backgroundColor: "rgba(255,255,255,0.04)",
                 border: "1px solid rgba(255,255,255,0.08)",
+                textAlign: "left",
               }}
             >
-              <p style={{ fontSize: "11px", color: "#9f9f9f", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "4px" }}>
+              <p style={{ fontSize: "11px", color: "#6a6a7a", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "4px" }}>
                 {item.label}
               </p>
-              <p style={{ fontSize: "14px", fontWeight: 600, wordBreak: "break-all" }}>{item.value}</p>
+              <p style={{ fontSize: "13px", fontWeight: 600, wordBreak: "break-all", color: "#e0e0e0", margin: 0 }}>{item.value}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Tips */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            marginBottom: "32px",
+            textAlign: "left",
+          }}
+        >
+          {tips.map((tip) => (
+            <div
+              key={tip.text}
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "12px",
+                padding: "14px 16px",
+                borderRadius: "14px",
+                backgroundColor: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.07)",
+              }}
+            >
+              <span style={{ fontSize: "18px", lineHeight: 1, flexShrink: 0 }}>{tip.icon}</span>
+              <p style={{ margin: 0, fontSize: "14px", color: "#b8b8b8", lineHeight: 1.5 }}>{tip.text}</p>
             </div>
           ))}
         </div>
@@ -219,7 +262,7 @@ export default function BookingForm() {
           href="/"
           style={{
             display: "inline-block",
-            padding: "14px 28px",
+            padding: "16px 32px",
             borderRadius: "14px",
             backgroundColor: "#ffffff",
             color: "#111111",
@@ -230,9 +273,18 @@ export default function BookingForm() {
         >
           Volver al inicio
         </a>
+
+        <style>{`
+          @media (max-width: 480px) {
+            .booking-summary-grid {
+              grid-template-columns: 1fr !important;
+            }
+          }
+        `}</style>
       </div>
     );
   }
+
 
   /* ── form state ── */
   return (

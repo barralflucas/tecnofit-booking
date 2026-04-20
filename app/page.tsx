@@ -1,30 +1,26 @@
 import AdminNavButton from "@/app/components/AdminNavButton";
 
 export default function Home() {
-  const highlights = [
-    "Sesiones de 45 min",
-    "Máximo 2 personas por turno",
-    "Lunes a viernes de 7 a 20 h",
-    "Sábados de 9 a 13 h",
-  ];
 
   const steps = [
     {
       step: "01",
-      title: "Completá tus datos",
-      text: "Dejanos tu nombre, teléfono y email para reservar tu lugar.",
+      title: "Elegí día y horario",
+      text: "Seleccioná el turno que mejor se adapte a tu agenda. Hay lugares disponibles de lunes a sábado.",
     },
     {
       step: "02",
-      title: "Elegí día y horario",
-      text: "Seleccioná el turno que mejor se adapte a tu agenda.",
+      title: "Completá tus datos",
+      text: "Dejanos tu nombre, teléfono y email. Solo toma un minuto.",
     },
     {
       step: "03",
-      title: "Confirmá tu reserva",
-      text: "Recibí la confirmación y preparate para vivir TecnoFit.",
+      title: "Recibí confirmación por email",
+      text: "Te enviamos todos los detalles al instante. ¡Listo para entrenar!",
     },
   ];
+
+
 
   return (
     <div
@@ -61,52 +57,27 @@ export default function Home() {
             justifyContent: "space-between",
           }}
         >
-          {/* Logo / wordmark */}
+          {/* Logo */}
           <a
             href="/"
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "8px",
               textDecoration: "none",
-              color: "inherit",
+              flexShrink: 0,
             }}
           >
-            <span
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt="TecnoFit"
               style={{
-                width: "28px",
-                height: "28px",
-                borderRadius: "8px",
-                backgroundColor: "#ffffff",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0,
+                height: "36px",
+                width: "auto",
+                objectFit: "contain",
+                display: "block",
               }}
-            >
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#111111"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-            </span>
-            <span
-              style={{
-                fontSize: "15px",
-                fontWeight: 700,
-                letterSpacing: "-0.02em",
-                color: "#f5f5f5",
-              }}
-            >
-              TecnoFit
-            </span>
+            />
           </a>
 
           <AdminNavButton />
@@ -138,53 +109,70 @@ export default function Home() {
             <span
               style={{
                 display: "inline-block",
-                padding: "8px 14px",
+                padding: "6px 14px",
                 border: "1px solid rgba(255,255,255,0.14)",
                 borderRadius: "999px",
-                fontSize: "13px",
-                letterSpacing: "0.04em",
-                color: "#cfcfcf",
-                marginBottom: "22px",
+                fontSize: "12px",
+                letterSpacing: "0.06em",
+                color: "#9f9f9f",
+                marginBottom: "20px",
+                textTransform: "uppercase",
               }}
             >
-              TECNOFIT · CLASE DE PRUEBA
+              Clase de prueba gratuita
             </span>
 
             <h1
               style={{
-                fontSize: "clamp(40px, 6vw, 72px)",
-                lineHeight: 1,
-                margin: "0 0 18px 0",
+                fontSize: "clamp(36px, 5.5vw, 68px)",
+                lineHeight: 1.05,
+                margin: "0 0 20px 0",
                 fontWeight: 800,
                 letterSpacing: "-0.04em",
               }}
             >
-              Reservá tu
+              Reservá tu clase
               <br />
-              clase de prueba
+              de prueba en
+              <br />
+              TecnoFit
             </h1>
 
             <p
               style={{
-                fontSize: "18px",
-                lineHeight: 1.6,
+                fontSize: "17px",
+                lineHeight: 1.65,
                 color: "#b8b8b8",
-                maxWidth: "560px",
+                maxWidth: "520px",
                 marginBottom: "32px",
               }}
             >
-              Viví la experiencia TecnoFit con una sesión de prueba guiada,
-              dinámica y semiprivada. Elegí tu día, tu horario y asegurá tu
-              lugar en menos de 2 minutos.
+              Entrenamiento funcional guiado, en grupos reducidos y con
+              seguimiento personalizado. Asegurá tu lugar en menos de
+              2 minutos.
+            </p>
+
+            {/* Emotional value line */}
+            <p
+              style={{
+                fontSize: "15px",
+                fontWeight: 600,
+                color: "#e0e0e0",
+                letterSpacing: "-0.01em",
+                marginBottom: "20px",
+              }}
+            >
+              Entréná distinto. Resultados reales desde la primera clase.
             </p>
 
             <div
               style={{
                 display: "flex",
-                gap: "14px",
+                gap: "12px",
                 flexWrap: "wrap",
-                marginBottom: "28px",
+                marginBottom: "36px",
               }}
+              className="cta-buttons"
             >
               <a
                 href="/reservar"
@@ -192,13 +180,16 @@ export default function Home() {
                   backgroundColor: "#ffffff",
                   color: "#111111",
                   textDecoration: "none",
-                  padding: "16px 24px",
+                  padding: "17px 28px",
                   borderRadius: "14px",
                   fontWeight: 700,
                   fontSize: "16px",
+                  flex: "1 1 auto",
+                  textAlign: "center",
+                  minWidth: "160px",
                 }}
               >
-                Reservar ahora
+                Reservar mi clase
               </a>
 
               <a
@@ -207,40 +198,51 @@ export default function Home() {
                   border: "1px solid rgba(255,255,255,0.18)",
                   color: "#f5f5f5",
                   textDecoration: "none",
-                  padding: "16px 24px",
+                  padding: "17px 24px",
                   borderRadius: "14px",
                   fontWeight: 600,
                   fontSize: "16px",
+                  flex: "1 1 auto",
+                  textAlign: "center",
+                  minWidth: "140px",
                 }}
               >
                 Cómo funciona
               </a>
             </div>
 
+            {/* Microcopy */}
             <div
               style={{
                 display: "flex",
-                gap: "12px",
-                flexWrap: "wrap",
+                flexDirection: "column",
+                gap: "6px",
+                marginTop: "4px",
               }}
             >
-              {highlights.map((item) => (
-                <span
-                  key={item}
+              {[
+                "Cupos limitados por turno (máx. 2 personas)",
+                "Confirmación inmediata por email",
+              ].map((line) => (
+                <p
+                  key={line}
                   style={{
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    backgroundColor: "rgba(255,255,255,0.04)",
-                    padding: "10px 14px",
-                    borderRadius: "999px",
-                    fontSize: "14px",
-                    color: "#d6d6d6",
+                    margin: 0,
+                    fontSize: "13px",
+                    color: "#5a5a6a",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "7px",
                   }}
                 >
-                  {item}
-                </span>
+                  <span style={{ color: "#4a7a5a", fontWeight: 700, fontSize: "15px", lineHeight: 1 }}>✓</span>
+                  {line}
+                </p>
               ))}
             </div>
+
           </div>
+
 
           <div
             style={{
@@ -360,6 +362,10 @@ export default function Home() {
         @media (max-width: 480px) {
           .admin-label {
             display: none;
+          }
+          .cta-buttons a {
+            min-width: unset !important;
+            width: 100%;
           }
         }
       `}</style>
