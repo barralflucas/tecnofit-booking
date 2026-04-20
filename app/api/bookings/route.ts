@@ -125,10 +125,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    bookingId = result?.booking_id ?? crypto.randomUUID();
-    console.log("RESULT:", result);
-    console.log("BOOKING ID:", bookingId);
-    console.log(`[/api/bookings] Booking created: ${bookingId} — ${name} @ ${day} ${time}`);
+    bookingId = result.booking_id!;
+    console.log(`[/api/bookings] ✅ Created: ${bookingId} — ${name} @ ${day} ${time}`);
   } catch (err) {
     console.error("[/api/bookings] Unexpected error:", err);
     return NextResponse.json(
@@ -137,10 +135,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // ── 6. Send emails (parallel, non-blocking to response) ────
+  // ── 6. Send emails ─────────────────────────────────────────
   //
-  // We await both in parallel but don't block on failures —
-  // email errors are caught inside the helpers.
+  // IMPORTANT: we AWAIT both emails before returning.
+  // In Vercel serverless, the Lambda exits as soon as the response is
+  // sent. Fire-and-forget (void Promise.all) means the runtime is killed
+  // before the promises resolve — emails never arrive.
   const bookingData = {
     id: bookingId,
     name: name.trim(),
@@ -150,11 +150,12 @@ export async function POST(req: NextRequest) {
     booking_time: time,
   };
 
-  // Fire-and-forget in parallel — errors logged internally
-  void Promise.all([
+  console.log(`[/api/bookings] Sending emails for booking ${bookingId}…`);
+  await Promise.all([
     sendUserConfirmation(bookingData),
     sendStaffNotification(bookingData),
   ]);
+  console.log(`[/api/bookings] Emails dispatched for booking ${bookingId}.`);
 
   // ── 7. Return success ──────────────────────────────────────
   return NextResponse.json(
