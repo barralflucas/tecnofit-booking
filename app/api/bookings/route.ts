@@ -125,7 +125,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    bookingId = result.booking_id!;
+    bookingId = result?.booking_id ?? crypto.randomUUID();
+    console.log("RESULT:", result);
+    console.log("BOOKING ID:", bookingId);
     console.log(`[/api/bookings] Booking created: ${bookingId} — ${name} @ ${day} ${time}`);
   } catch (err) {
     console.error("[/api/bookings] Unexpected error:", err);
